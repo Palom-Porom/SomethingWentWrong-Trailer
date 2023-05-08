@@ -32,13 +32,16 @@ public class BulletLogic : WeaponLogic
 
     override public bool UseWeapon()
     {
-        if (GM.InventoryManager.standartItemGrid.checkAmmo(AmmoType))
-        {
-            StartCoroutine(ThrowBullet());
-            return true;
-        }
+        //if (GM.InventoryManager.standartItemGrid.checkAmmo(AmmoType))
+        //{
+        //    StartCoroutine(ThrowBullet());
+        //    return true;
+        //}
 
-        return false;
+        //return false;
+
+        StartCoroutine(ThrowBullet());
+        return true;
     }
     override public void StopWeapon() {  }
     

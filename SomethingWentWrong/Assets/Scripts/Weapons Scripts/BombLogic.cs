@@ -33,13 +33,15 @@ public class BombLogic : WeaponLogic
 
     override public bool UseWeapon()
     {
-        if (GM.InventoryManager.standartItemGrid.checkAmmo(AmmoType))
-        {
-            ThrowBomb();
-            return true;
-        }
+        //if (GM.InventoryManager.standartItemGrid.checkAmmo(AmmoType))
+        //{
+        //    ThrowBomb();
+        //    return true;
+        //}
 
-        return false;
+        //return false;
+        ThrowBomb();
+        return true;
     }
     override public void StopWeapon() {  }
     

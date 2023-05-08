@@ -105,13 +105,8 @@ public class LaserLogic : WeaponLogic
 
     private bool tryToReloadLaser()
     {
-        if (GM.InventoryManager.standartItemGrid.checkAmmo(AmmoType))
-        {
-            StartCoroutine(ReloadLaser());
-            return true;
-        }
-
-        return false;
+        StartCoroutine(ReloadLaser());
+        return true;
     }
 
     private IEnumerator ReloadLaser()
