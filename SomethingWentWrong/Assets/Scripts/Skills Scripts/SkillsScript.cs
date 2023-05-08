@@ -87,6 +87,7 @@ public class SkillsScript : MonoBehaviour
     
 
     public void InitSkills() {
+        //return;
         currentVariant = 1;
         variantMask.gameObject.transform.position = variantsButtons[1].gameObject.transform.position;
 
