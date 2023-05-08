@@ -47,7 +47,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Fade: 0
-    - _Pixels: 8
+    - _Pixels: 20
     - _RetroWaveEffect: 1
     m_Colors:
     - _BorderColor: {r: 0, g: 4.894118, b: 5.992157, a: 0}

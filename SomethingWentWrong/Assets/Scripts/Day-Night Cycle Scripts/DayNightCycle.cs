@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 using static GameManager;
+using UnityEngine.InputSystem;
 
 
 public enum DayTime { Sunrise = 0, Day, Sunset, Night, Midnight }
@@ -26,6 +27,9 @@ public class DayNightCycle : MonoBehaviour
     
     
     [SerializeField] private Material landscapeMaterial;
+
+    bool isNightNeeded = false;
+    bool buttonReadyToPress = true;
 
     public bool RetroWaveEffect
     {
@@ -97,57 +101,110 @@ public class DayNightCycle : MonoBehaviour
         StartCoroutine(Cycle());
     }
 
-     private IEnumerator Cycle()
+    private void Update()
+    {
+        //Debug.Log(2);
+        if (Keyboard.current.nKey.isPressed)
+        {
+            
+            if (buttonReadyToPress)
+            {
+                isNightNeeded = !isNightNeeded;
+                //Debug.Log(isNightNeeded);
+                if (isNightNeeded)
+                {
+                    dayCycle = DayTime.Sunset;
+                    currentTime = 0;
+                    StartCoroutine(WaitFor1Sec());
+                }
+                else
+                {
+                    dayCycle = DayTime.Sunrise;
+                    currentTime = 0;
+                    StartCoroutine(WaitFor1Sec());
+                }
+            }
+        }
+    }
+
+    IEnumerator WaitFor1Sec()
+    {
+        buttonReadyToPress = false;
+        yield return new WaitForSecondsRealtime(1f);
+        buttonReadyToPress = true;
+    }
+
+    private IEnumerator Cycle()
      {
          while (true)
          {
-             sunriseDuration += 3f;
-             
-             while (true)
-             {
-                 // Sunrise
-                 currentTime += Time.deltaTime;
+            //sunriseDuration += 3f;
+            Debug.Log("sunrise now");
+            while (true)
+            {
+                // Sunrise
+                if (dayCycle == DayTime.Sunset)
+                {
+                    currentTime = 0;
+                    break;
+                }
 
-                 if (currentTime >= sunriseDuration)
-                 {
-                     currentTime = 0;
-                     dayCycle = DayTime.Day;
-                     break;
-                 }
-             
-                 timePassedPercent = currentTime / sunriseDuration;
-                 globalLight.color = Color.Lerp(sunriseColor, dayColor, timePassedPercent);
-                 globalLight.intensity = Mathf.Lerp(sunriseIntensity, dayIntensity, timePassedPercent);
-                 
-                 yield return new WaitForNextFrameUnit();
-             }
-             
-             while (true)
-             {
-                 // Day
-                 currentTime += Time.deltaTime;
+                currentTime += Time.deltaTime;
 
-                 if (currentTime >= dayDuration)
-                 {
-                     currentTime = 0;
-                     dayCycle = DayTime.Sunset;
-                     break;
-                 }
-             
-                 timePassedPercent = currentTime / dayDuration;
-                 globalLight.color = Color.Lerp(dayColor, sunsetColor, timePassedPercent);
-                 globalLight.intensity = Mathf.Lerp(dayIntensity, sunsetIntensity, timePassedPercent);
+                //if (currentTime >= sunriseDuration)
+                //{
+                //    currentTime = 0;
+                //    dayCycle = DayTime.Day;
 
-                 //yield return new WaitForEndOfFrame();
-                 yield return new WaitForNextFrameUnit();
-             }
+                //    break;
+                //}
+
+                landscapeMaterial.SetFloat("_Fade", Mathf.Lerp(1f, 0f, 2 * timePassedPercent));
+                timePassedPercent = currentTime / sunriseDuration;
+                globalLight.color = Color.Lerp(sunriseColor, dayColor, timePassedPercent);
+                globalLight.intensity = Mathf.Lerp(sunriseIntensity, dayIntensity, timePassedPercent);
+
+                yield return new WaitForNextFrameUnit();
+            }
+
+            //while (true)
+            // {
+            //    // Day
+            //    if (dayCycle == DayTime.Sunset)
+            //    {
+            //        currentTime = 0;
+            //        break;
+            //    }
+
+            //    currentTime += Time.deltaTime;
+
+            //     //if (currentTime >= dayDuration)
+            //     //{
+            //     //    currentTime = 0;
+            //     //    dayCycle = DayTime.Sunrise;
+            //     //    break;
+            //     //}
+             
+            //     timePassedPercent = currentTime / dayDuration;
+            //     globalLight.color = Color.Lerp(dayColor, sunsetColor, timePassedPercent);
+            //     globalLight.intensity = Mathf.Lerp(dayIntensity, sunsetIntensity, timePassedPercent);
+
+            //     //yield return new WaitForEndOfFrame();
+            //     yield return new WaitForNextFrameUnit();
+            // }
              
              Debug.Log("it's sunset now");
              
              while (true)
              {
-                 // Sunset
-                 currentTime += Time.deltaTime;
+                // Sunset
+                if (dayCycle == DayTime.Sunrise)
+                {
+                    currentTime = 0;
+                    break;
+                }
+
+                currentTime += Time.deltaTime;
 
                  if (currentTime >= sunsetDuration)
                  {
@@ -170,16 +227,22 @@ public class DayNightCycle : MonoBehaviour
              
              while (true)
              {
-                 // Night
-                 currentTime += Time.deltaTime;
+                // Night
+                if (dayCycle == DayTime.Sunrise)
+                {
+                    currentTime = 0;
+                    break;
+                }
+
+                currentTime += Time.deltaTime;
                  currentTime = Mathf.Min(currentTime, nightDuration);
 
-                 if (GM.Spawner.Enemies.ExistingEnemies == 0 && currentTime >= nightDuration)
-                 {
-                     currentTime = 0;
-                     dayCycle = DayTime.Midnight;
-                     break;
-                 }
+                 //if (GM.Spawner.Enemies.ExistingEnemies == 0 && currentTime >= nightDuration)
+                 //{
+                 //    currentTime = 0;
+                 //    dayCycle = DayTime.Midnight;
+                 //    break;
+                 //}
              
                  timePassedPercent = currentTime / nightDuration;
                  landscapeMaterial.SetFloat("_Fade", Mathf.Lerp(0.2f, 1f, 5 * timePassedPercent));
@@ -189,38 +252,44 @@ public class DayNightCycle : MonoBehaviour
                  yield return new WaitForNextFrameUnit();
              }  
              
-             while (true)
-             {
-                 // Midnight
-                 currentTime += Time.deltaTime;
+             //while (true)
+             //{
+             //   // Midnight
+             //   if (dayCycle == DayTime.Day)
+             //   {
+             //       currentTime = 0;
+             //       break;
+             //   }
 
-                 if (currentTime >= midnightDuration)
-                 {
-                     currentTime = 0;
-                     dayCycle = DayTime.Sunrise;
+             //   currentTime += Time.deltaTime;
+
+             //    if (currentTime >= midnightDuration)
+             //    {
+             //        currentTime = 0;
+             //        dayCycle = DayTime.Night;
                      
-                     // DayCount++;
-                     // if (dayCount >= 3)
-                     //     GM.GameOver("Вы победили");
-                     // else
-                     // {
-                     //     вызов окна скилов
-                     //     GM.UI.SkillsMenu.GetComponentInParent<SkillsScript>().InitSkills();
-                     //     if (!GM.UI.EndScreen.GetComponentInParent<EndScreen>().isOpened)
-                     //         GM.UI.SkillsMenu.SetActive(true);
-                     // }
+             //        // DayCount++;
+             //        // if (dayCount >= 3)
+             //        //     GM.GameOver("Вы победили");
+             //        // else
+             //        // {
+             //        //     вызов окна скилов
+             //        //     GM.UI.SkillsMenu.GetComponentInParent<SkillsScript>().InitSkills();
+             //        //     if (!GM.UI.EndScreen.GetComponentInParent<EndScreen>().isOpened)
+             //        //         GM.UI.SkillsMenu.SetActive(true);
+             //        // }
                      
-                     //spawnSystem.spawnEnabled = false;
-                     break;
-                 }
+             //        //spawnSystem.spawnEnabled = false;
+             //        break;
+             //    }
              
-                 timePassedPercent = currentTime / midnightDuration;
-                 landscapeMaterial.SetFloat("_Fade", Mathf.Lerp(1f, 0f, 2 * timePassedPercent));
-                 globalLight.color = Color.Lerp(midnightColor, sunriseColor, timePassedPercent);
-                 globalLight.intensity = Mathf.Lerp(midnightIntensity, sunriseIntensity, timePassedPercent);
+             //    timePassedPercent = currentTime / midnightDuration;
+             //    landscapeMaterial.SetFloat("_Fade", Mathf.Lerp(1f, 0f, 2 * timePassedPercent));
+             //    globalLight.color = Color.Lerp(midnightColor, sunriseColor, timePassedPercent);
+             //    globalLight.intensity = Mathf.Lerp(midnightIntensity, sunriseIntensity, timePassedPercent);
                  
-                 yield return new WaitForNextFrameUnit();
-             }
+             //    yield return new WaitForNextFrameUnit();
+             //}
          }
      }
 

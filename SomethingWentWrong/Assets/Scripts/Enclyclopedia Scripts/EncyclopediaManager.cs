@@ -186,6 +186,7 @@ public class EncyclopediaManager : MonoBehaviour
 
     public void OpenNewCreature(CreaturesBase openedCreature)
     {
+        return;
         if (GM.IsTutorial)
             return;
         boolSaves[openedCreature.name] = true;
@@ -580,10 +581,10 @@ public class EncyclopediaManager : MonoBehaviour
 
     private void SaveBoolInfo()
     {
-        using (FileStream fs = new FileStream(pathForSaves, FileMode.Create))
-        {
-            formatter.Serialize(fs, boolSaves);
-        }
+        //using (FileStream fs = new FileStream(pathForSaves, FileMode.Create))
+        //{
+        //    formatter.Serialize(fs, boolSaves);
+        //}
     }
 
     private void LoadBoolInfo()
