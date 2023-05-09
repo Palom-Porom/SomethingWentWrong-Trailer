@@ -34,10 +34,10 @@ public class EnemiesSpawnSystem : MonoBehaviour
             if (existingEnemies == 0)
             {
                 //Debug.Log("Волна противников подавлена");
-                GM.Cycle.DayCount++;
-                GM.UI.SkillsMenu.GetComponentInParent<SkillsScript>().InitSkills();
-                if (!GM.UI.EndScreen.GetComponentInParent<EndScreen>().isOpened)
-                    GM.UI.SkillsMenu.SetActive(true);
+                //GM.Cycle.DayCount++;
+                //GM.UI.SkillsMenu.GetComponentInParent<SkillsScript>().InitSkills();
+                //if (!GM.UI.EndScreen.GetComponentInParent<EndScreen>().isOpened)
+                //    GM.UI.SkillsMenu.SetActive(true);
             }
         }
     }

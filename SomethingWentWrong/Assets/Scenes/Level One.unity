@@ -1442,6 +1442,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 165191086770567848, guid: 323d0d5d77f931d4caa5305171aacba1, type: 3}
+      propertyPath: hp
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 165191086770567848, guid: 323d0d5d77f931d4caa5305171aacba1, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1636903198}
@@ -44831,8 +44835,24 @@ PrefabInstance:
       value: SurvivalManager
       objectReference: {fileID: 0}
     - target: {fileID: 5480212214129357061, guid: c7b711ed6fd31e348b52add9c9c52a16, type: 3}
+      propertyPath: maxStamina
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480212214129357061, guid: c7b711ed6fd31e348b52add9c9c52a16, type: 3}
+      propertyPath: hungerDepletionRate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480212214129357061, guid: c7b711ed6fd31e348b52add9c9c52a16, type: 3}
+      propertyPath: staminaRechargeRate
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480212214129357061, guid: c7b711ed6fd31e348b52add9c9c52a16, type: 3}
       propertyPath: thirstDepletionRate
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5480212214129357061, guid: c7b711ed6fd31e348b52add9c9c52a16, type: 3}
+      propertyPath: anoxaemiaDepletionRate
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5480212214129357062, guid: c7b711ed6fd31e348b52add9c9c52a16, type: 3}
       propertyPath: m_RootOrder
@@ -99844,11 +99864,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2919171422484403361, guid: 4eb910ab9d87d884f900438e26b734e1, type: 3}
       propertyPath: enemiesToSpawn
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2919171422484403361, guid: 4eb910ab9d87d884f900438e26b734e1, type: 3}
       propertyPath: timeBetweenSpawn
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2919171422484403361, guid: 4eb910ab9d87d884f900438e26b734e1, type: 3}
       propertyPath: minTimeBetweenSpawn
@@ -99876,7 +99896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2919171422484403361, guid: 4eb910ab9d87d884f900438e26b734e1, type: 3}
       propertyPath: enemiesProbabilities.Array.data[0]
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2919171422484403361, guid: 4eb910ab9d87d884f900438e26b734e1, type: 3}
       propertyPath: enemiesProbabilities.Array.data[1]
