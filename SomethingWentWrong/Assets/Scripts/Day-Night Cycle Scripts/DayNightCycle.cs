@@ -94,7 +94,7 @@ public class DayNightCycle : MonoBehaviour
         DayCount = 1;
         
         currentTime = 0;
-        dayCycle = DayTime.Sunrise;
+        dayCycle = DayTime.Night;
         globalLight.color = sunriseColor;
         globalLight.intensity = sunriseIntensity;
 
@@ -140,36 +140,9 @@ public class DayNightCycle : MonoBehaviour
          {
             //sunriseDuration += 3f;
             Debug.Log("sunrise now");
-            while (true)
-            {
-                // Sunrise
-                if (dayCycle == DayTime.Sunset)
-                {
-                    currentTime = 0;
-                    break;
-                }
-
-                currentTime += Time.deltaTime;
-
-                //if (currentTime >= sunriseDuration)
-                //{
-                //    currentTime = 0;
-                //    dayCycle = DayTime.Day;
-
-                //    break;
-                //}
-
-                landscapeMaterial.SetFloat("_Fade", Mathf.Lerp(1f, 0f, 2 * timePassedPercent));
-                timePassedPercent = currentTime / sunriseDuration;
-                globalLight.color = Color.Lerp(sunriseColor, dayColor, timePassedPercent);
-                globalLight.intensity = Mathf.Lerp(sunriseIntensity, dayIntensity, timePassedPercent);
-
-                yield return new WaitForNextFrameUnit();
-            }
-
             //while (true)
-            // {
-            //    // Day
+            //{
+            //    // Sunrise
             //    if (dayCycle == DayTime.Sunset)
             //    {
             //        currentTime = 0;
@@ -178,50 +151,77 @@ public class DayNightCycle : MonoBehaviour
 
             //    currentTime += Time.deltaTime;
 
-            //     //if (currentTime >= dayDuration)
-            //     //{
-            //     //    currentTime = 0;
-            //     //    dayCycle = DayTime.Sunrise;
-            //     //    break;
-            //     //}
-             
-            //     timePassedPercent = currentTime / dayDuration;
-            //     globalLight.color = Color.Lerp(dayColor, sunsetColor, timePassedPercent);
-            //     globalLight.intensity = Mathf.Lerp(dayIntensity, sunsetIntensity, timePassedPercent);
+            //    //if (currentTime >= sunriseDuration)
+            //    //{
+            //    //    currentTime = 0;
+            //    //    dayCycle = DayTime.Day;
 
-            //     //yield return new WaitForEndOfFrame();
+            //    //    break;
+            //    //}
+
+            //    landscapeMaterial.SetFloat("_Fade", Mathf.Lerp(1f, 0f, 2 * timePassedPercent));
+            //    timePassedPercent = currentTime / sunriseDuration;
+            //    globalLight.color = Color.Lerp(sunriseColor, dayColor, timePassedPercent);
+            //    globalLight.intensity = Mathf.Lerp(sunriseIntensity, dayIntensity, timePassedPercent);
+
+            //    yield return new WaitForNextFrameUnit();
+            //}
+
+            ////while (true)
+            //// {
+            ////    // Day
+            ////    if (dayCycle == DayTime.Sunset)
+            ////    {
+            ////        currentTime = 0;
+            ////        break;
+            ////    }
+
+            ////    currentTime += Time.deltaTime;
+
+            ////     //if (currentTime >= dayDuration)
+            ////     //{
+            ////     //    currentTime = 0;
+            ////     //    dayCycle = DayTime.Sunrise;
+            ////     //    break;
+            ////     //}
+             
+            ////     timePassedPercent = currentTime / dayDuration;
+            ////     globalLight.color = Color.Lerp(dayColor, sunsetColor, timePassedPercent);
+            ////     globalLight.intensity = Mathf.Lerp(dayIntensity, sunsetIntensity, timePassedPercent);
+
+            ////     //yield return new WaitForEndOfFrame();
+            ////     yield return new WaitForNextFrameUnit();
+            //// }
+             
+            // Debug.Log("it's sunset now");
+             
+            // while (true)
+            // {
+            //    // Sunset
+            //    if (dayCycle == DayTime.Sunrise)
+            //    {
+            //        currentTime = 0;
+            //        break;
+            //    }
+
+            //    currentTime += Time.deltaTime;
+
+            //     if (currentTime >= sunsetDuration)
+            //     {
+            //         currentTime = 0;
+            //         dayCycle = DayTime.Night;
+            //         StartCoroutine(ess.SpawnEnemies());
+            //         //spawnSystem.spawnEnabled = true;
+            //         break;
+            //     }
+             
+            //     timePassedPercent = currentTime / sunsetDuration;
+            //     landscapeMaterial.SetFloat("_Fade", Mathf.Lerp(0, 0.2f, timePassedPercent));
+            //     globalLight.color = Color.Lerp(sunsetColor, nightColor, timePassedPercent);
+            //     globalLight.intensity = Mathf.Lerp(sunsetIntensity, nightIntensity, timePassedPercent);
+                 
             //     yield return new WaitForNextFrameUnit();
             // }
-             
-             Debug.Log("it's sunset now");
-             
-             while (true)
-             {
-                // Sunset
-                if (dayCycle == DayTime.Sunrise)
-                {
-                    currentTime = 0;
-                    break;
-                }
-
-                currentTime += Time.deltaTime;
-
-                 if (currentTime >= sunsetDuration)
-                 {
-                     currentTime = 0;
-                     dayCycle = DayTime.Night;
-                     StartCoroutine(ess.SpawnEnemies());
-                     //spawnSystem.spawnEnabled = true;
-                     break;
-                 }
-             
-                 timePassedPercent = currentTime / sunsetDuration;
-                 landscapeMaterial.SetFloat("_Fade", Mathf.Lerp(0, 0.2f, timePassedPercent));
-                 globalLight.color = Color.Lerp(sunsetColor, nightColor, timePassedPercent);
-                 globalLight.intensity = Mathf.Lerp(sunsetIntensity, nightIntensity, timePassedPercent);
-                 
-                 yield return new WaitForNextFrameUnit();
-             }
 
              Debug.Log("it's night now");
              
