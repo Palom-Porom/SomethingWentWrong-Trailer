@@ -1360,13 +1360,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1975161169}
     m_Modifications:
+    - target: {fileID: 5788261759747907348, guid: b1aa45a9ba6a981439eb1e3192e0e914, type: 3}
+      propertyPath: orthographic size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5788261759747907349, guid: b1aa45a9ba6a981439eb1e3192e0e914, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5788261759747907349, guid: b1aa45a9ba6a981439eb1e3192e0e914, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5788261759747907349, guid: b1aa45a9ba6a981439eb1e3192e0e914, type: 3}
       propertyPath: m_LocalPosition.y
@@ -44526,7 +44530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5480212214129357061, guid: c7b711ed6fd31e348b52add9c9c52a16, type: 3}
       propertyPath: hungerDepletionRate
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5480212214129357061, guid: c7b711ed6fd31e348b52add9c9c52a16, type: 3}
       propertyPath: staminaRechargeRate
@@ -44534,11 +44538,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5480212214129357061, guid: c7b711ed6fd31e348b52add9c9c52a16, type: 3}
       propertyPath: thirstDepletionRate
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5480212214129357061, guid: c7b711ed6fd31e348b52add9c9c52a16, type: 3}
       propertyPath: anoxaemiaDepletionRate
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5480212214129357062, guid: c7b711ed6fd31e348b52add9c9c52a16, type: 3}
       propertyPath: m_RootOrder
@@ -96908,12 +96912,20 @@ PrefabInstance:
       value: -199
       objectReference: {fileID: 0}
     - target: {fileID: 6854328986730885905, guid: 0dadbdd80a54f4584a052da48f13f123, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6854328986730885905, guid: 0dadbdd80a54f4584a052da48f13f123, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6854328986730885905, guid: 0dadbdd80a54f4584a052da48f13f123, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 483
+      value: -275
       objectReference: {fileID: 0}
     - target: {fileID: 6854328986730885905, guid: 0dadbdd80a54f4584a052da48f13f123, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 150
+      value: 465
       objectReference: {fileID: 0}
     - target: {fileID: 6997216401461938315, guid: 0dadbdd80a54f4584a052da48f13f123, type: 3}
       propertyPath: m_text
@@ -99185,7 +99197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2919171422484403361, guid: 4eb910ab9d87d884f900438e26b734e1, type: 3}
       propertyPath: enemiesToSpawn
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2919171422484403361, guid: 4eb910ab9d87d884f900438e26b734e1, type: 3}
       propertyPath: timeBetweenSpawn
